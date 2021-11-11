@@ -12,6 +12,8 @@ source:
 build:
   skip: True  # [not win]
   number: 0
+  run_exports:
+    - {{ pin_subpackage('pdcurses', max_pin='x.x') }}
 
 requirements:
   build:
