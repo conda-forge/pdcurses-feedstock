@@ -1,5 +1,6 @@
 {% set name = "pdcurses" %}
 {% set version = "3.9" %}
+{% set posix = 'm2-' if win else '' %}
 
 package:
   name: {{ name|lower }}
@@ -8,16 +9,19 @@ package:
 source:
   url: https://github.com/wmcbrine/PDCurses/archive/refs/tags/{{ version }}.tar.gz
   sha256: 590dbe0f5835f66992df096d3602d0271103f90cf8557a5d124f693c2b40d7ec
+  patches:
+    - set-build-params.patch  # [win]
 
 build:
   skip: True  # [not win]
-  number: 2
+  number: 3
   run_exports:
     - {{ pin_subpackage('pdcurses', max_pin='x.x') }}
 
 requirements:
   build:
     - {{ compiler('c') }}
+    - {{ posix }}patch
   host:
 
   run:

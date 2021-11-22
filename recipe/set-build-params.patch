@@ -1,0 +1,28 @@
+diff -ru a/curses.h b/curses.h
+--- a/curses.h	2019-09-04 22:08:02.000000000 +0200
++++ b/curses.h	2021-11-22 13:24:10.615798200 +0100
+@@ -43,6 +43,11 @@
+ # define PDC_PP98       1
+ #endif
+ 
++/* Conda-Forge build settings*/
++#define PDC_WIDE
++#define PDC_FORCE_UTF8
++#define PDC_DLL_BUILD
++
+ /*----------------------------------------------------------------------*/
+ 
+ #include <stdarg.h>
+diff -ru a/wincon/Makefile.vc b/wincon/Makefile.vc
+--- a/wincon/Makefile.vc	2019-09-04 22:08:02.000000000 +0200
++++ b/wincon/Makefile.vc	2021-11-22 13:28:43.120998800 +0100
+@@ -21,7 +21,8 @@
+ 
+ PDCURSES_WIN_H	= $(osdir)\pdcwin.h
+ 
+-CC		= cl.exe -nologo
++# disable warning C4005 (macro redefinition)
++CC		= cl.exe -nologo /wd4005
+ 
+ !ifdef DEBUG
+ CFLAGS		= -Z7 -DPDCDEBUG
