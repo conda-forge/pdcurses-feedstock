@@ -17,3 +17,5 @@ copy pdcurses.dll %LIBRARY_PREFIX%\bin\
 REM install lib
 mkdir %LIBRARY_PREFIX%\lib\
 copy pdcurses.lib %LIBRARY_PREFIX%\lib\
+REM most tools search for curses.lib
+copy %LIBRARY_PREFIX%\lib\pdcurses.lib %LIBRARY_PREFIX%\lib\curses.lib
